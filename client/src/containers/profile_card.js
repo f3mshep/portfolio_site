@@ -14,12 +14,12 @@ const ProfileCard = props => (
           </a>
         </li>
         <li className="list-inline-item">
-          <a href={props.card.linkedin}>
+          <a href={props.card.github}>
             <i className="fa fa-github" />
           </a>
         </li>
         <li className="list-inline-item">
-          <a href={props.card.github}>
+          <a href={props.card.linkedIn}>
             <i className="fa fa-linkedin" />
           </a>
         </li>
