@@ -1,7 +1,7 @@
   import React from 'react'
 
 const Project = (props) =>(
-  <div className="col-md-4 col-sm-6 portfolio-item">
+  <div className="portfolio-item">
     <a className="portfolio-link" href={props.link}>
       <div className="portfolio-hover">
         <div className="portfolio-hover-content">

@@ -1,8 +1,15 @@
 import React from 'react';
 import Project from '../containers/project';
 import MagicMaker from '../img/portfolio/magic.png';
-import Sudoku from '../img/portfolio/sudoku2.jpg'
-import Keto from '../img/portfolio/keto2.jpg'
+import Sudoku from '../img/portfolio/sudoku2.jpg';
+import Keto from '../img/portfolio/keto2.jpg';
+import Excel from '../img/portfolio/excel.jpg';
+import Carousel from 'nuka-carousel';
+
+const settings = {
+  slidesToShow: 3,
+  slidesToScroll: 1
+};
 
 const projects = [
   {
@@ -22,6 +29,12 @@ const projects = [
     pic: MagicMaker,
     boldTitle: "MagicMaker",
     mutedText: "Join a Magic: the Gathering Card social network that provides detailed statistics and card prices"
+  },
+  {
+    link: "http://www.alexandrawright.net/apps/json",
+    pic: Excel,
+    boldTitle: "JSON to CSV",
+    mutedText: "Quickly convert JSON from API endpoints to a CSV file, no asynchronous requests neccessary!"
   }
 ];
 
@@ -49,7 +62,7 @@ class Projects extends React.Component{
             </div>
           </div>
           <div className="row">
-            {myProjects}
+            <Carousel slideWidth={1} framePadding={"0px 80px 40px 80px"} cellSpacing={20}  slidesToShow={3} wrapAround={true}>{myProjects}</Carousel>
           </div>
         </div>
     </section>);
