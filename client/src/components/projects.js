@@ -16,7 +16,7 @@ const projects = [
     link: "https://stark-harbor-64502.herokuapp.com/",
     pic: Keto,
     boldTitle: "KetoTonight",
-    mutedText: "Find ketogenic recipes that you can make tonight, using a specialized 'pantry' search!"
+    mutedText: "Find ketogenic recipes that you can make tonight, using a 'pantry' search!"
   },
   {
     link: "https://sudoku-now.herokuapp.com/",
@@ -28,13 +28,13 @@ const projects = [
     link: "https://the-magic-maker.herokuapp.com/",
     pic: MagicMaker,
     boldTitle: "MagicMaker",
-    mutedText: "Join a Magic: the Gathering Card social network that provides detailed statistics and card prices"
+    mutedText: "Join a Magic: the Gathering Card social network with deckbuilding."
   },
   {
     link: "http://www.alexandrawright.net/apps/json",
     pic: Excel,
     boldTitle: "JSON to CSV",
-    mutedText: "Quickly convert JSON from API endpoints to a CSV file, no asynchronous requests neccessary!"
+    mutedText: "Quickly convert JSON to a CSV file, all in the browser!"
   }
 ];
 
@@ -73,7 +73,7 @@ class Projects extends React.Component{
             </div>
           </div>
           <div className="row">
-            <Carousel slideWidth={1} framePadding={"0px 80px 40px 80px"} cellSpacing={20}  slidesToShow={this.getSlideAmount()} wrapAround={true}>{myProjects}</Carousel>
+            <Carousel width={"100%"} framePadding={"-40px 75px 40px 75px"} cellSpacing={10}  slidesToShow={this.getSlideAmount()} wrapAround={true}>{myProjects}</Carousel>
           </div>
         </div>
     </section>);
