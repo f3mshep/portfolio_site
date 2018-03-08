@@ -252,9 +252,9 @@ header.masthead .intro-text .intro-heading {
   font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 1000px) {
   header.masthead .intro-text {
-    padding-top: 300px;
+    padding-top: 220px;
     padding-bottom: 200px;
   }
   header.masthead .intro-text .intro-lead-in {
@@ -265,9 +265,30 @@ header.masthead .intro-text .intro-heading {
     font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
   header.masthead .intro-text .intro-heading {
-    font-size: 75px;
+    font-size: 70px;
     font-weight: 700;
-    line-height: 75px;
+    line-height: 70px;
+    margin-bottom: 30px;
+    font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+}
+
+@media (max-height: 450px) {
+  header.masthead .intro-text {
+    padding-top: 100px;
+    padding-bottom: 200px;
+  }
+  header.masthead .intro-text .intro-lead-in {
+    font-size: 22px;
+    font-style: italic;
+    line-height: 22px;
+    margin-bottom: 25px;
+    font-family: 'Droid Serif', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  }
+  header.masthead .intro-text .intro-heading {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 40px;
     margin-bottom: 50px;
     font-family: 'Montserrat', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }

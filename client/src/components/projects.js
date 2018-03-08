@@ -22,7 +22,7 @@ const projects = [
     link: "https://sudoku-now.herokuapp.com/",
     pic: Sudoku,
     boldTitle: "SudokuNow",
-    mutedText: "Play the classic puzzle game Sudoku in a sleek user interface. Save your game, and pick up right where you left off."
+    mutedText: "Play the classic puzzle game Sudoku in a sleek user interface."
   },
   {
     link: "https://the-magic-maker.herokuapp.com/",
@@ -45,7 +45,18 @@ class Projects extends React.Component{
       <Project link={project.link} pic={project.pic} key={index}
       boldTitle={project.boldTitle} mutedText={project.mutedText} />
     );
+  }
 
+  getSlideAmount(){
+    if (this.props.width < 750){
+      return 1;
+    }
+    else if(this.props.width < 1000){
+      return 2;
+    }
+    else{
+      return 3;
+    }
   }
 
   render(){
@@ -62,7 +73,7 @@ class Projects extends React.Component{
             </div>
           </div>
           <div className="row">
-            <Carousel slideWidth={1} framePadding={"0px 80px 40px 80px"} cellSpacing={20}  slidesToShow={3} wrapAround={true}>{myProjects}</Carousel>
+            <Carousel slideWidth={1} framePadding={"0px 80px 40px 80px"} cellSpacing={20}  slidesToShow={this.getSlideAmount()} wrapAround={true}>{myProjects}</Carousel>
           </div>
         </div>
     </section>);

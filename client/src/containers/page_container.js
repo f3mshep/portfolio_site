@@ -8,6 +8,7 @@ import NavBar from './navbar'
 import Footer from './footer';
 import Contact from '../components/contact';
 import Waypoint from 'react-waypoint';
+import WindowSize from '../components/window_size';
 
 class PageContainer extends React.Component{
 
@@ -34,7 +35,7 @@ class PageContainer extends React.Component{
         <ExpertiseComponent name={"expertise-component"}/>
           <Waypoint onEnter={this.showStickyNavbar.bind(this)} onLeave={this.hideStickyNavbar.bind(this)}>
             <div>
-              <Project name={"project-component"}/>
+              <WindowSize><Project name={"project-component"}/></WindowSize>
               <AboutMe name={"about-component"}/>
               <Contact name={"contact-component"} />
               <Map/>
