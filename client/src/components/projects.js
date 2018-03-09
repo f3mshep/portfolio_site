@@ -5,11 +5,15 @@ import Sudoku from '../img/portfolio/sudoku2.jpg';
 import Keto from '../img/portfolio/keto2.jpg';
 import Excel from '../img/portfolio/excel.jpg';
 import Carousel from 'nuka-carousel';
+import NavIcons from '../containers/navigation_icon';
+
 
 const settings = {
   slidesToShow: 3,
   slidesToScroll: 1
 };
+
+
 
 const projects = [
   {
@@ -73,7 +77,7 @@ class Projects extends React.Component{
             </div>
           </div>
           <div className="row">
-            <Carousel width={"100%"} framePadding={"-40px 75px 40px 75px"} cellSpacing={10}  slidesToShow={this.getSlideAmount()} wrapAround={true}>{myProjects}</Carousel>
+            <Carousel decorators={NavIcons} width={"100%"} framePadding={"-40px 75px 40px 75px"} cellSpacing={10}  slidesToShow={this.getSlideAmount()} wrapAround={true}>{myProjects}</Carousel>
           </div>
         </div>
     </section>);
