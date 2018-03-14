@@ -1,9 +1,9 @@
-[] Implement features from jQuery
+[x] Implement features from jQuery
   -Smooth Scrolling (When user clicks nav bar to go somewhere, make it smoooooooth)
   -Hide NavBar on Modal
   -See if jQuery is even working (for bootstrap purposes)
-[] Fill out text
+[x] Fill out text
 [x] Make intro image a full screen hero
-[] Figure out blog formatting
+[x] Figure out blog formatting
 [x] Get font awesome working
-[] import google map, drop pin to show location
+[x] import google map, drop pin to show location
