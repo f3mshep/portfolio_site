@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 class NavBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { navClass: "navbar navbar-expand-lg navbar-dark bg-dark" };
+    this.state = { navClass: "navbar navbar-expand-lg navbar-shrink" };
   }
 
   // toggleNavbar() {

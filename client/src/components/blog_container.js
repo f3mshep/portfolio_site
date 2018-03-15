@@ -20,6 +20,10 @@ class BlogComponent extends React.Component{
       })
   }
 
+  addPosts(){
+
+  }
+
   componentDidMount(){
     this.fetchPosts()
   }
@@ -27,7 +31,7 @@ class BlogComponent extends React.Component{
   render(){
     return(
       <div>
-        <NavBar isStick={true}/>
+        <NavBar />
       </div>
     )
   }
