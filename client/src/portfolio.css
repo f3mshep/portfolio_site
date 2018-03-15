@@ -597,8 +597,14 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 
 }
 
+.post-content {
+  color: rgb(64, 64, 64);
+  font-family: "Lora";
+}
+
 .post-title {
   font-weight: 400;
+  color: rgb(64, 64, 64);
   font-family: 'Open Sans', sans-serif;
 }
 

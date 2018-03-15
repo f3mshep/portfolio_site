@@ -1,5 +1,4 @@
 class PostsController < ApplicationController
-  before_action :post_setter, only: [:show]
 
   def index
     @posts = Post.all
@@ -8,13 +7,15 @@ class PostsController < ApplicationController
 
   def show
     if params[:next]
-      binding.pry
-      @post = @post.next
+      @next = Post.find_slug(params[:next]).next
+      render json: @next
     elsif params[:previous]
-      binding.pry
-      @post = @post.previous
+      @prev = Post.find_slug(params[:previous]).previous
+      render json: @prev
+    else
+      post_setter
+      render json: @post
     end
-    render json: @post
   end
 
   def update

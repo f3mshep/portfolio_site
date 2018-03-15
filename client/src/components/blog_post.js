@@ -1,6 +1,11 @@
-import React from 'react'
-import Footer from '../containers/footer'
-import MyButton from '../containers/my_button'
+import React from 'react';
+import Footer from '../containers/footer';
+import MyButton from '../containers/my_button';
+import NavIconLeft from '../containers/nav_icon_left';
+import NavIconRight from '../containers/nav_icon_right';
+import NavRow from '../containers/NavRow';
+import BlogNavBar from '../containers/blog_nav_bar';
+import ReactMarkdown from 'react-markdown';
 
 class BlogPost extends React.Component{
 
@@ -12,7 +17,7 @@ class BlogPost extends React.Component{
       next: null,
       prev: null
     }
-  }
+  };
 
   fetchPost(){
     fetch(`/posts/${this.state.slug}`, {
@@ -24,20 +29,24 @@ class BlogPost extends React.Component{
 
   fetchNext(slug){
     const encodedStr = slug || encodeURIComponent(this.state.slug)
+    console.log(encodedStr)
     fetch(`/posts/${this.state.slug}?next=${encodedStr}`, {
       accept: "application/json"
     })
       .then(response => response.json())
-      .then(post => this.setState({next: post}))
+      .then(post => {
+        debugger
+        this.setState({next: post})})
   }
 
   fetchPrevious(slug){
     const encodedStr = slug || encodeURIComponent(this.state.slug)
+    console.log(encodedStr)
     fetch(`/posts/${this.state.slug}?previous=${encodedStr}`, {
       accept: "application/json"
     })
       .then(response => response.json())
-      .then(post => this.setState({ previous: post }))
+      .then(post => this.setState({ prev: post }))
   }
 
   handleClickNext(){
@@ -47,7 +56,7 @@ class BlogPost extends React.Component{
       next: null,
       post: currentPost
     })
-    this.fetchNext(currentPost)
+    this.fetchNext(currentPost.slug)
   }
 
   handleClickPrevious(){
@@ -57,7 +66,7 @@ class BlogPost extends React.Component{
       next: this.state.post,
       post: currentPost
     })
-    this.fetchPrevious(currentPost)
+    this.fetchPrevious(currentPost.slug)
   }
 
   componentDidMount(){
@@ -71,6 +80,8 @@ class BlogPost extends React.Component{
   render(){
     return(
       <React.Fragment>
+        <BlogNavBar/>
+        <div className="spacer"/>
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-8">
@@ -78,18 +89,21 @@ class BlogPost extends React.Component{
                 {this.state.post.title}
               </h2>
               <p className="meta-data text-muted">Posted on {this.state.post.ordinal_time}</p>
-              <p className="post-content">{this.state.post.content}</p>
-              <hr/>
+              <ReactMarkdown source={this.state.post.content} />
+              <div className="spacer"/>
             </div>
           </div>
-          <div className="row">
-            {this.state.prev ? <MyButton callback={this.handleClickPrevious.bind(this)} value="Previous Post" /> : null}
-            {this.state.next ? <MyButton callback={this.handleClickNext.bind(this)} value="Next Post"/> : null}
-          </div>
+          <NavRow
+            prev={this.state.prev}
+            next={this.state.next}
+            prevCallback={this.handleClickPrevious.bind(this)}
+            nextCallback={this.handleClickNext.bind(this)}/>
         </div>
-
+        <div className="spacer"/>
         <hr/>
+        <div className="spacer"/>
         <Footer/>
+        <div className="spacer" />
       </React.Fragment>
     );
   };

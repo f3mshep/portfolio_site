@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "react-router-dom";
 import NavBar from "../containers/blog_nav_bar";
 import BlogCard from "../containers/blog_card";
-
+import Footer from "../containers/footer";
 
 class BlogComponent extends React.Component{
 
@@ -38,7 +38,7 @@ class BlogComponent extends React.Component{
 
   render(){
     return(
-      <div>
+      <React.Fragment>
         <NavBar />
         <div className="spacer-lg"/>
         <div className="container">
@@ -46,7 +46,12 @@ class BlogComponent extends React.Component{
             {this.addPosts()}
           </div>
         </div>
-      </div>
+        <div className="spacer-lg"/>
+        <hr/>
+        <div className="spacer" />
+        <Footer />
+        <div className="spacer" />
+      </React.Fragment>
     )
   }
 }
