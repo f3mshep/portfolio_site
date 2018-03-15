@@ -7,6 +7,11 @@ class PostsController < ApplicationController
   end
 
   def show
+    if params[:next]
+      @post = @post.next
+    elsif params[:previous]
+      @post = @post.previous
+    end
     render json: @post
   end
 
@@ -23,7 +28,7 @@ class PostsController < ApplicationController
   private
 
   def post_setter
-    @post = Post.find(params[:id])
+    @post = Post.find_slug(params[:id])
   end
 
 end
