@@ -1,12 +1,14 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const BlogCard = (props) => (
-  <div className="post-card">
+  <div className="post-card col-md-8">
     <Link to={props.link}>
       <h2 className="post-title">{props.title}</h2>
-      <h5 className="post-content">{props.content}</h5>
+      <p className="post-preview">{props.content}</p>
     </Link>
-    <p className="meta-data">Posted on {props.date}</p>
+    <p className="meta-data text-muted">Posted on {props.date}</p>
+    <hr/>
   </div>
 )
 

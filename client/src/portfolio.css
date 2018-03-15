@@ -83,7 +83,7 @@ section h3.section-subheading {
   font-size: 1.5em;
   font-weight: 600;
   background-color: rgba(231, 231, 231, 0.986);
-  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23); 
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
 }
 
 .spacer {
@@ -585,4 +585,27 @@ ul.social-buttons li a:active, ul.social-buttons li a:focus, ul.social-buttons l
 
 .fa-nav:hover{
   color:rgba(98, 110, 96, 0.651);
+}
+
+.post-card a{
+  text-decoration: none;
+  color: rgb(64, 64, 64);
+}
+
+.post-card {
+  font-family: "Lora";
+
+}
+
+.post-title {
+  font-weight: 400;
+  font-family: 'Open Sans', sans-serif;
+}
+
+a .post-title:hover {
+  color: #626E60;
+}
+
+.meta-data {
+  font-style: italic;
 }

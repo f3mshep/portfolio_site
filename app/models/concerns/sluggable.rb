@@ -1,8 +1,8 @@
 module Sluggable
 
-  def to_slug
+  def to_slug(string)
     #strip the string
-    ret = self.strip
+    ret = string.strip
 
     #blow away apostrophes
     ret.gsub! /['`]/,""
@@ -20,7 +20,7 @@ module Sluggable
      #strip off leading/trailing underscore
      ret.gsub! /\A[_\.]+|[_\.]+\z/,""
 
-     ret
+     ret.downcase
   end
 
 end
