@@ -10,10 +10,11 @@ class NewPost extends React.Component {
   }
 
   createPost(postObject){
+    debugger
     fetch("/posts", {
       accept: "application/json",
       method: "post",
-      body: JSON.stringify(postObject)
+      body: JSON.stringify({post: postObject})
    })
   }
 
@@ -22,9 +23,10 @@ class NewPost extends React.Component {
       <React.Fragment>
         <BlogNavBar/>
         <div className="container">
+          <div className="spacer-lg"/>
           <div className="row justify-content-center">
-            <h2>New Post</h2>
-            <br/>
+            <div className="col-md-12" style={{textAlign: "center"}}><h2>New Post</h2></div>
+            <div className="spacer"/>
             <TextArea onSubmit={this.createPost.bind(this)} />
           </div>
         </div>

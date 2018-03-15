@@ -1,7 +1,7 @@
 class StaticController < ApplicationController
 
-  def index
-    
+  def authenticate
+
   end
 
 end

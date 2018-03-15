@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  before_action :post_setter, only: [:update]
 
   def index
     @posts = Post.all
@@ -19,19 +20,23 @@ class PostsController < ApplicationController
   end
 
   def update
-
+    @post.update(post_params)
   end
 
   def create
-  end
-
-  def destroy
+    @post = Post.new
+    @post.assign_attributes(post_params)
+    @post.save
   end
 
   private
 
   def post_setter
     @post = Post.find_slug(params[:id])
+  end
+
+  def post_params
+    params.require(:post).permit(:title, :content)
   end
 
 end
