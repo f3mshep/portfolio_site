@@ -35,7 +35,6 @@ class BlogPost extends React.Component{
     })
       .then(response => response.json())
       .then(post => {
-        debugger
         this.setState({next: post})})
   }
 

@@ -25,6 +25,13 @@ class TextArea extends React.Component{
     this.props.onSubmit(this.state)
   }
 
+  componentWillMount(){
+    this.setState({
+      title: this.props.title,
+      content: this.props.content
+    })
+  }
+
   render(){
     return(
       <div className="col-md-10">
@@ -37,7 +44,7 @@ class TextArea extends React.Component{
             <label for="blog-content">Content</label>
             <textarea className="form-control" onChange={this.handleContentChange} id="blog-content" rows="24" value={this.state.content} />
           </div>
-          <MyButton callback={this.props.onSubmit} value="Submit"/>
+          <MyButton callback={this.handleSubmit.bind(this)} value="Submit"/>
         </form>
       </div>
     );

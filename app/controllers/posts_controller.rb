@@ -20,6 +20,7 @@ class PostsController < ApplicationController
   end
 
   def update
+    binding.pry
     @post.update(post_params)
   end
 

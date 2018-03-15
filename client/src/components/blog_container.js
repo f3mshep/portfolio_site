@@ -27,8 +27,8 @@ class BlogComponent extends React.Component{
   }
 
   addPosts(){
-    return this.state.posts.map(post =>
-      <BlogCard title={post.title} content={this.formatPreview(post.content)} date={post.ordinal_time} link={`/posts/${post.slug}`}/>
+    return this.state.posts.map((post, index) =>
+      <BlogCard title={post.title} key={index} content={this.formatPreview(post.content)} date={post.ordinal_time} link={`/posts/${post.slug}`}/>
     )
   }
 
