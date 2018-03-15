@@ -8,8 +8,10 @@ class PostsController < ApplicationController
 
   def show
     if params[:next]
+      binding.pry
       @post = @post.next
     elsif params[:previous]
+      binding.pry
       @post = @post.previous
     end
     render json: @post
