@@ -44,8 +44,9 @@ class TextArea extends React.Component{
             <label htmlFor="blog-content">Content</label>
             <textarea className="form-control" onChange={this.handleContentChange} id="blog-content" rows="24" value={this.state.content} />
           </div>
-          <MyButton callback={this.handleSubmit.bind(this)} value="Submit"/>
+
         </form>
+        <MyButton callback={this.handleSubmit.bind(this)} value="Submit" />
       </div>
     );
   }

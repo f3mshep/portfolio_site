@@ -1,7 +1,6 @@
 import React from 'react';
 import BlogNavBar from '../containers/blog_nav_bar';
 import MyButton from '../containers/my_button';
-import $ from 'jquery';
 import { withRouter } from 'react-router'
 
 class BlogAuthenticate extends React.Component{
@@ -27,16 +26,22 @@ class BlogAuthenticate extends React.Component{
     const password = this.state.password
     const request = { "auth": { "email": email, "password": password } }
     const that = this
-    $.ajax({
-      url: "/user_token",
-      type: "POST",
-      data: request,
-      dataType: "json",
-      success: function (result) {
-        console.log(result)
-        localStorage.setItem("jwt", result.jwt)
-        that.props.history.push('/posts')
+    fetch("/user_token", {
+      method: "POST",
+      headers: {"Content-Type": "application/json"},
+      body: JSON.stringify(request)
+    })
+    .then(response => {
+      if(!response.ok){
+        console.log('nope.')
       }
+      else{
+        return response.json()
+      }
+    })
+    .then(token => {
+      localStorage.setItem("jwt", token.jwt)
+      that.props.history.push('/posts')
     })
   }
 
