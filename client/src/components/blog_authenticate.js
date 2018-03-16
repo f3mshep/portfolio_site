@@ -1,37 +1,41 @@
 import React from 'react';
 import BlogNavBar from '../containers/blog_nav_bar';
 import MyButton from '../containers/my_button';
+import $ from 'jquery';
+import { withRouter } from 'react-router'
 
 class BlogAuthenticate extends React.Component{
   constructor(props){
     super(props)
     this.state = {
-      username:"",
+      email:"",
       password:""
     }
   }
 
-  handleUsernameChange(event){
-    this.setState({username: event.target.value})
+  handleEmailChange(event){
+    this.setState({email: event.target.value})
   }
 
   handlePasswordChange(event){
     this.setState({password: event.target.value})
   }
 
-  login(){
-    const username = this.state.username
+  login(event){
+    event.stopPropagation()
+    const email = this.state.email
     const password = this.state.password
-    const request = { "auth": { "username": username, "password": password } }
-    console.log(request)
+    const request = { "auth": { "email": email, "password": password } }
+    const that = this
     $.ajax({
-      url: "http://localhost:3000/api/user_token",
+      url: "/user_token",
       type: "POST",
       data: request,
       dataType: "json",
       success: function (result) {
         console.log(result)
         localStorage.setItem("jwt", result.jwt)
+        that.props.history.push('/posts')
       }
     })
   }
@@ -41,20 +45,24 @@ class BlogAuthenticate extends React.Component{
       <React.Fragment>
         <BlogNavBar/>
         <div className="container">
-          <div className="row">
-            <form>
+          <div className="spacer-lg"/>
+          <div className="row justify-content-center">
+            <div className="col-md-4">
               <div className="form-group">
-                  <label htmlFor="authenticate-user">Username</label>
-                  <input className="form-control" type="text" value={this.state.username} onChange={this.handleUsernameChange.bind(this)} />
-                  <label htmlFor="authenticate-pass" >Password</label>
-                  <input className="form-control" type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
-                </div>
-                <MyButton callback={this.login.bind(this)}/>
-            </form>
+                <label htmlFor="authenticate-user">Email</label>
+                <input className="form-control" id="authenticate-user" type="text" value={this.state.email} onChange={this.handleEmailChange.bind(this)} />
+                <label htmlFor="authenticate-pass" >Password</label>
+                <input className="form-control" id="authenticate-pass" type="password" value={this.state.password} onChange={this.handlePasswordChange.bind(this)} />
+                <br/>
+                <MyButton blockLevel={true} value="Submit" callback={this.login.bind(this)} />
+              </div>
+            </div>
           </div>
         </div>
       </React.Fragment>
-    )
-  }
+    );
+  };
 
-}
+};
+
+export default withRouter(BlogAuthenticate);

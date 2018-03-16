@@ -27,12 +27,18 @@ class EditPost extends React.Component {
   }
 
   updatePost(postObject) {
+    const token = "Bearer " + localStorage.getItem("jwt")
+    const that = this
     fetch(`/posts/${this.state.slug}`, {
       method: "PATCH",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", "Authorization": token },
       body: JSON.stringify({ post: postObject })
     })
-    .then(response => {console.log(response)});
+    .then(response => {
+      if (response.ok){
+        that.props.history.push(`/posts/${that.state.slug}`)
+      }
+    });
   }
 
   render() {

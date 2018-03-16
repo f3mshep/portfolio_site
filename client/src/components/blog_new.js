@@ -2,14 +2,22 @@ import React from 'react';
 import BlogNavBar from '../containers/blog_nav_bar';
 import Footer from '../containers/footer';
 import TextArea from '../components/blog_text_area';
+import { withRouter } from 'react-router'
 
 class NewPost extends React.Component {
 
   createPost(postObject){
+    const token = "Bearer " + localStorage.getItem("jwt")
+    const that = this
     fetch("/posts", {
       method: "POST",
-      headers: {"Content-Type": "application/json"},
+      headers: { "Content-Type": "application/json", "Authorization": token},
       body: JSON.stringify({post: postObject})
+   })
+   .then(response =>{
+     if (response.ok){
+       that.props.history.push('/posts')
+     }
    })
   }
 
@@ -35,4 +43,4 @@ class NewPost extends React.Component {
   };
 };
 
-export default NewPost
+export default withRouter(NewPost)
