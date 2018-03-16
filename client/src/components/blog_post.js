@@ -18,7 +18,7 @@ class BlogPost extends React.Component{
   };
 
   fetchPost(){
-    fetch(`/posts/${this.state.slug}`, {
+    fetch(`/api/posts/${this.state.slug}`, {
       accept: "application/json"
     })
     .then(response => response.json())
@@ -28,7 +28,7 @@ class BlogPost extends React.Component{
   fetchNext(slug){
     const encodedStr = slug || encodeURIComponent(this.state.slug)
     console.log(encodedStr)
-    fetch(`/posts/${this.state.slug}?next=${encodedStr}`, {
+    fetch(`/api/posts/${this.state.slug}?next=${encodedStr}`, {
       accept: "application/json"
     })
       .then(response => response.json())
@@ -39,7 +39,7 @@ class BlogPost extends React.Component{
   fetchPrevious(slug){
     const encodedStr = slug || encodeURIComponent(this.state.slug)
     console.log(encodedStr)
-    fetch(`/posts/${this.state.slug}?previous=${encodedStr}`, {
+    fetch(`/api/posts/${this.state.slug}?previous=${encodedStr}`, {
       accept: "application/json"
     })
       .then(response => response.json())

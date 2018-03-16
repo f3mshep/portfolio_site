@@ -26,7 +26,7 @@ class BlogAuthenticate extends React.Component{
     const password = this.state.password
     const request = { "auth": { "email": email, "password": password } }
     const that = this
-    fetch("/user_token", {
+    fetch("/api/user_token", {
       method: "POST",
       headers: {"Content-Type": "application/json"},
       body: JSON.stringify(request)

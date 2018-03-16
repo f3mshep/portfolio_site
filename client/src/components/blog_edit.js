@@ -13,7 +13,7 @@ class EditPost extends React.Component {
   }
 
   fetchPost() {
-    fetch(`/posts/${this.state.slug}`, {
+    fetch(`/api/posts/${this.state.slug}`, {
       accept: "application/json"
     })
       .then(response => response.json())
@@ -29,7 +29,7 @@ class EditPost extends React.Component {
   updatePost(postObject) {
     const token = "Bearer " + localStorage.getItem("jwt")
     const that = this
-    fetch(`/posts/${this.state.slug}`, {
+    fetch(`/api/posts/${this.state.slug}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json", "Authorization": token },
       body: JSON.stringify({ post: postObject })

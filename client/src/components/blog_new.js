@@ -9,7 +9,7 @@ class NewPost extends React.Component {
   createPost(postObject){
     const token = "Bearer " + localStorage.getItem("jwt")
     const that = this
-    fetch("/posts", {
+    fetch("/api/posts", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": token},
       body: JSON.stringify({post: postObject})

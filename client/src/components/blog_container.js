@@ -13,7 +13,7 @@ class BlogComponent extends React.Component{
   }
 
   fetchPosts(){
-    fetch('/posts', {
+    fetch('/api/posts', {
       accept: "application/json"})
       .then(response => response.json())
       .then(posts => {
