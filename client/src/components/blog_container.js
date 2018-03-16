@@ -2,6 +2,7 @@ import React from 'react';
 import NavBar from "../containers/blog_nav_bar";
 import BlogCard from "../containers/blog_card";
 import Footer from "../containers/footer";
+import AnimatedWrapper from './animated_wrapper';
 
 class BlogComponent extends React.Component{
 

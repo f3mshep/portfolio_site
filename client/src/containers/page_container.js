@@ -9,6 +9,7 @@ import Footer from './footer';
 import Contact from '../components/contact';
 import Waypoint from 'react-waypoint';
 import WindowSize from '../components/window_size';
+import AnimatedWrapper from '../components/animated_wrapper';
 
 class PageContainer extends React.Component{
 
