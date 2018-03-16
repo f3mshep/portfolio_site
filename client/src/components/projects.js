@@ -7,14 +7,6 @@ import Excel from '../img/portfolio/excel.jpg';
 import Carousel from 'nuka-carousel';
 import NavIcons from '../containers/navigation_icon';
 
-
-const settings = {
-  slidesToShow: 3,
-  slidesToScroll: 1
-};
-
-
-
 const projects = [
   {
     link: "https://stark-harbor-64502.herokuapp.com/",

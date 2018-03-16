@@ -22,41 +22,29 @@ class NavBar extends React.Component {
   // }
 
   render() {
-    return (
-      <div>
+    return <div>
         <nav className={this.state.navClass} id="mainNav">
           <div className="container">
-            <Link
-              activeClass="not-active"
-              className="navbar-brand nav-link"
-              to="/"
-            >
+            <Link className="navbar-brand nav-link" to="/">
               alexandra wright
             </Link>
-            <button
-              className="navbar-toggler navbar-toggler-right"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navbarResponsive"
-              aria-controls="navbarResponsive"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <i className="fa fa-bars" />
-            </button>
-            <div className="collapse navbar-collapse" id="navbarResponsive">
-              <ul className="navbar-nav text-uppercase ml-auto">
+            <div>
+              <ul className="navbar-nav  ml-auto">
                 <li className="nav-item">
-                  <Link className="nav-link" to="/posts">
+                  <Link style={{ fontFamily: "Open Sans" }} className="nav-link" to="/posts">
                     Blog
+                  </Link>
+                </li>
+                <li className="nav-item">
+                  <Link style={{ fontFamily: "Open Sans" }} className="nav-link" to="/">
+                    Home
                   </Link>
                 </li>
               </ul>
             </div>
           </div>
         </nav>
-      </div>
-    );
+      </div>;
   }
 }
 

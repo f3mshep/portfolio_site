@@ -16,11 +16,11 @@ class Post < ApplicationRecord
   end
 
   def next
-    Post.where("id > ?", id).limit(1).first
+    self.class.where("id > ?", id).first
   end
 
   def previous
-    Post.where("id < ?", id).limit(1).first
+    self.class.where("id < ?", id).last
   end
 
 end

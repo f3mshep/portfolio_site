@@ -1,11 +1,9 @@
 import React from 'react';
 import Footer from '../containers/footer';
-import MyButton from '../containers/my_button';
-import NavIconLeft from '../containers/nav_icon_left';
-import NavIconRight from '../containers/nav_icon_right';
 import NavRow from '../containers/NavRow';
 import BlogNavBar from '../containers/blog_nav_bar';
 import ReactMarkdown from 'react-markdown';
+import CodeBlock from './codeblock';
 
 class BlogPost extends React.Component{
 
@@ -77,34 +75,28 @@ class BlogPost extends React.Component{
 
 
   render(){
-    return(
-      <React.Fragment>
-        <BlogNavBar/>
-        <div className="spacer"/>
+    return <React.Fragment>
+        <BlogNavBar />
+        <div className="spacer" />
         <div className="container">
           <div className="row justify-content-center">
             <div className="col-md-8">
-              <h2 className="post-title">
-                {this.state.post.title}
-              </h2>
-              <p className="meta-data text-muted">Posted on {this.state.post.ordinal_time}</p>
-              <ReactMarkdown source={this.state.post.content} />
-              <div className="spacer"/>
+              <h2 className="post-title">{this.state.post.title}</h2>
+              <p className="meta-data text-muted">
+                Posted on {this.state.post.ordinal_time}
+              </p>
+              <ReactMarkdown skipHtml={false} escapeHtml={false} renderers={{ code: CodeBlock }} source={this.state.post.content} />
+              <div className="spacer" />
             </div>
           </div>
-          <NavRow
-            prev={this.state.prev}
-            next={this.state.next}
-            prevCallback={this.handleClickPrevious.bind(this)}
-            nextCallback={this.handleClickNext.bind(this)}/>
+          <NavRow prev={this.state.prev} next={this.state.next} prevCallback={this.handleClickPrevious.bind(this)} nextCallback={this.handleClickNext.bind(this)} />
         </div>
-        <div className="spacer"/>
-        <hr/>
-        <div className="spacer"/>
-        <Footer/>
         <div className="spacer" />
-      </React.Fragment>
-    );
+        <hr />
+        <div className="spacer" />
+        <Footer />
+        <div className="spacer" />
+      </React.Fragment>;
   };
 
 };

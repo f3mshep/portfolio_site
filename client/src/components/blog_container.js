@@ -1,5 +1,4 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import NavBar from "../containers/blog_nav_bar";
 import BlogCard from "../containers/blog_card";
 import Footer from "../containers/footer";

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import PageContainer from './containers/page_container';
-import { BrowserRouter as Router, Route, Link, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import BlogIndex from './components/blog_container';
 import BlogPost from './components/blog_post';
 import BlogNew from './components/blog_new';

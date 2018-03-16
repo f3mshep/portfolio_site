@@ -27,12 +27,12 @@ class EditPost extends React.Component {
   }
 
   updatePost(postObject) {
-    debugger
     fetch(`/posts/${this.state.slug}`, {
       method: "PATCH",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ post: postObject })
-    });
+    })
+    .then(response => {console.log(response)});
   }
 
   render() {

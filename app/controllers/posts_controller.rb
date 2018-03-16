@@ -2,7 +2,7 @@ class PostsController < ApplicationController
   before_action :post_setter, only: [:update]
 
   def index
-    @posts = Post.all
+    @posts = Post.all.order('id DESC')
     render json: @posts
   end
 
@@ -20,7 +20,6 @@ class PostsController < ApplicationController
   end
 
   def update
-    binding.pry
     @post.update(post_params)
   end
 

@@ -5,12 +5,7 @@ import TextArea from '../components/blog_text_area';
 
 class NewPost extends React.Component {
 
-  constructor(props){
-    super(props)
-  }
-
   createPost(postObject){
-    debugger
     fetch("/posts", {
       method: "POST",
       headers: {"Content-Type": "application/json"},

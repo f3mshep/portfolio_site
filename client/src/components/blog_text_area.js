@@ -38,10 +38,10 @@ class TextArea extends React.Component{
         <form>
           <div className="form-group">
             <br/>
-            <label for="blog-form-title">Title</label>
+            <label htmlFor="blog-form-title">Title</label>
             {this.props.title? <h3>{this.props.title}</h3> : <input type="text" onChange={this.handleTitleChange} class="form-control" value={this.state.title} id="blog-form-title"/>}
             <br/>
-            <label for="blog-content">Content</label>
+            <label htmlFor="blog-content">Content</label>
             <textarea className="form-control" onChange={this.handleContentChange} id="blog-content" rows="24" value={this.state.content} />
           </div>
           <MyButton callback={this.handleSubmit.bind(this)} value="Submit"/>
