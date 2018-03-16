@@ -6,6 +6,7 @@ import BlogPost from './components/blog_post';
 import BlogNew from './components/blog_new';
 import BlogEdit from './components/blog_edit';
 import BlogAuthenticate from './components/blog_authenticate';
+import NotFound from './components/not_found';
 
 class App extends Component {
   render() {
@@ -17,6 +18,8 @@ class App extends Component {
           <Route exact path="/posts/new" component={BlogNew} />
           <Route exact path="/authenticate" component={BlogAuthenticate} />
           <Route path="/posts/:slug" component={BlogPost} />
+          <Route exact path="/404" component={NotFound}/>
+          <Route component={NotFound}/>
         </Switch>
       </Router>;
   }

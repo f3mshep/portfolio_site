@@ -4,6 +4,7 @@ import NavRow from '../containers/NavRow';
 import BlogNavBar from '../containers/blog_nav_bar';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from './codeblock';
+import {WithRouter} from 'react-router';
 
 class BlogPost extends React.Component{
 
@@ -22,7 +23,14 @@ class BlogPost extends React.Component{
       accept: "application/json"
     })
     .then(response => response.json())
-    .then(post => {this.setState({post: post})})
+    .then(post => {
+      if(post){
+        this.setState({post: post})
+      }
+      else {
+        this.props.history.push('/404')
+      }
+    });
   }
 
   fetchNext(slug){
