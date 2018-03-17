@@ -2,4 +2,7 @@
 
 Source code for my portfolio website, [alexandrawright.net](http://www.alexandrawright.net)
 
-Currently, I have a static app built from react (check out the client folder for details) that will eventually make asynch requests to the rails app the root folder contains.
+It consists of 2 main parts: 
+  - A react app that lives in the root of my server as a static HTML file
+  - A Rails API that is running via Passenger
+  
