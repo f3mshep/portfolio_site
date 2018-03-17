@@ -12,7 +12,7 @@ class Post < ApplicationRecord
   end
 
   def format_time
-    self.ordinal_time = Time.now.strftime("%B %dth, %Y")
+    self.ordinal_time = Time.now.strftime("%B %dth, %Y") unless self.ordinal_time
   end
 
   def next
