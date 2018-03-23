@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :post_setter, only: [:update]
+  before_action :post_setter, only: [:update, :destroy]
   before_action :authenticate_user, only: [:create, :update]
 
   def index
@@ -28,6 +28,10 @@ class PostsController < ApplicationController
     @post = Post.new
     @post.assign_attributes(post_params)
     @post.save
+  end
+
+  def destroy
+    @post.destroy
   end
 
   private
