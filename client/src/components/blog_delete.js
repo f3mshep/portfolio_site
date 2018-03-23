@@ -30,4 +30,4 @@ class DeletePost extends React.Component{
   }
 }
 
-export default DeletePost
+export default withRouter(DeletePost)

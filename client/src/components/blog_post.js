@@ -4,7 +4,7 @@ import NavRow from '../containers/NavRow';
 import BlogNavBar from '../containers/blog_nav_bar';
 import ReactMarkdown from 'react-markdown';
 import CodeBlock from './codeblock';
-import {WithRouter} from 'react-router';
+import { withRouter } from "react-router";
 
 class BlogPost extends React.Component{
 
@@ -109,4 +109,4 @@ class BlogPost extends React.Component{
 
 };
 
-export default BlogPost
+export default withRouter(BlogPost);
