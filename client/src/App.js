@@ -18,8 +18,8 @@ class App extends Component {
           <Route exact path="/posts/:slug/edit" component={BlogEdit} />
           <Route exact path="/posts/new" component={BlogNew} />
           <Route exact path="/authenticate" component={BlogAuthenticate} />
-          <Route path="/posts/:slug" component={BlogPost} />
           <Route exact path="/posts/:slug/delete" component={BlogDelete} />
+          <Route path="/posts/:slug" component={BlogPost} />
           <Route exact path="/404" component={NotFound} />
           <Route component={NotFound} />
         </Switch>

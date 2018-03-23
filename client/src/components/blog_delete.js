@@ -12,6 +12,7 @@ class DeletePost extends React.Component{
       headers: { "Content-Type": "application/json", "Authorization": token }
     })
     .then(response => {
+      debugger
       if (response.ok) {
         that.props.history.push("/posts");
       }
@@ -20,4 +21,13 @@ class DeletePost extends React.Component{
       }
     });
   }
+
+  render(){
+    this.deletePost()
+    return(
+      <div></div>
+    )
+  }
 }
+
+export default DeletePost

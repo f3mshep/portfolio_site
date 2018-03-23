@@ -1,3 +1,5 @@
+User.create(email:"admin@admin.com", admin: true, password: "password", password_confirmation: "password")
+
 Post.create(title:"RESTful Thinking", content: "REST is a convention of naming routes in a web application that is resource focused. If you are new to web development, or programming in general, this statement may seem a little obtuse. What this means is that a URL written using REST conventions is focused on the noun, or the resource, in the same way that object oriented programming is focused on treating all data (even functions!) as objects, or nouns in this metaphor. REST conventions are not the only way to write web application routes, but they are some of the most common.
 
 So what does all this mean for the web developer and her trusty controller? What would a RESTful URL look like to access a specific blog post?
