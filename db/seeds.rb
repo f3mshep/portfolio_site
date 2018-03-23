@@ -75,3 +75,226 @@ Once I was confidant in my dedication to this career evolution, I left my job an
 
 With that being said, if you are interesting in hiring a passionate developer, contact me via [Linkedin](https://www.linkedin.com/in/alexandra-c-wright/)!!
 ")
+
+Post.create(title: "How to Create a Twitterbot with Python in Six Simple Steps", content: "Twitter bots are one of the most interesting things to arise from the popularity of Twitter. A twitter bot is a twitter account that is controlled by a piece of software that interacts with the Twitter API to create posts and occasionally interact with other users. Check out [MarkovaleRadio](https://twitter.com/MarkovaleRadio) for a prime example.
+
+Twitter bots can [make us laugh](https://twitter.com/big_ben_clock), provide up to date details on what movies are [available on Netflix](https://twitter.com/netflix_bot), and even generate [strangely beautiful art](https://twitter.com/pixelsorter). This post will show you how to create and deploy a twitter bot in under an hour that uses markov chains to generate amusing Shakespearian tweets. This tutorial is written with Linux and MacOS users in mind!
+
+#### Step One: Sign up for a new Twitter Account
+Visit this [link](https://twitter.com/new_account?lang=en) and sign up for a new account. Make sure to provide your phone number - twitter will not let you use an application token without a confirmed phone number. Don't worry if you already have the number linked to a twitter account already, you can have multiple accounts linked to the same phone number.
+
+#### Step Two: Create a new Twitter Application
+Go to the [Twitter application page](https://apps.twitter.com/) and create a new application. On the Keys and Tokens tab, copy the application consumer key and consumer secret. Think of this as the username and password to your application.
+
+ Scroll down, and also generate an access token for your account. This will allow the application you just created to use your account, including making posts with it! Remember, don't let anyone see either your consumer key/secret or your access token/secrets!
+
+<iframe src='https://giphy.com/embed/3oFyCYNrra8qo1Cv8Q' width='480' height='270' frameBorder='0' class='giphy-embed' allowFullScreen></iframe><p><a href='https://giphy.com/gifs/oskouioskoui-lotr-gifscapade-3oFyCYNrra8qo1Cv8Q'>via GIPHY</a></p>
+
+#### Step Three: Set up your twitter bot environment
+If you don't have python installed, you can download (anaconda)[https://www.anaconda.com/download/] which makes installing Python a breeze on any OS. In the location of your choosing, make a new directory to hold your twitterbot files. If you are following along in a terminal, the command would be something along the lines of `mkdir twitterbot`.
+
+Inside the twitterbot folder, it is time to make a few files:
+
+```bash
+touch .env
+touch .gitignore
+touch get_twitter_auth.py
+touch create_tweet
+touch scheduler
+curl -O https://raw.githubusercontent.com/jcjohnson/torch-rnn/master/data/tiny-shakespeare.txt
+```
+We also need to make the create_tweet and scheduler files executable. Enter
+```
+chmod +x create_tweet
+chmod +x scheduler
+```
+To do just that. This will make it possible to run the files using ./ instead of python!
+
+The .env file will hold your application's secrets. We will use the .gitignore file to tell github to ignore the .env file. We don't want to push the env file up to github for the world to see with all its secrets! The last command downloads tiny-shakespeare.txt, which we will feed to markovify to produce amusing Shakespearian tweets!
+
+The get_twitter_auth.py will handle authorizing our application using the Tweepy library, and create_tweet.py will use the Tweepy library to actually post to twitter. We are keeping the authorization separate from the tweet creation to adhere to DRY principles. If you want to expand the this program's functionality (such as harvesting tweets from twitter for your bot to use in its corpus) it will be a snap to import necessary function. Finally, scheduler.py will handle  the timing of creating the posts.
+
+Time to install some python packages!
+
+```bash
+pip install tweepy
+pip install schedule
+pip install python-env
+pip install markovify
+```
+As mentioned, tweepy is a twitter API wrapper. Schedule is a neat little package that lets you schedule python functions to run at designated times. Python-env gives us some syntactic sugar to import  our .env file. Markovify handles text generation using Markov Chains.
+
+Markov Chains use statistics to predict the probability of the next word, based on the previous word. Essentially, it shuffles up words based on a provided corpus (a collection of training documents) and spits out mostly coherent sentences. (Subreddit Simulator)[https://www.reddit.com/r/SubredditSimulator/] is an excellent example of this!
+
+Open the .gitignore file and add the following:
+```
+.env
+```
+This setting will make git ignore the .env file. This step is CRUCIAL if you want to deploy your application to github.
+
+#### Step Four: Authorizing your Application
+
+Open your .env file and add the following:
+```json
+ENV_KEY=<YOUR APPLICATION KEY HERE>
+ENV_SECRET=<YOUR APPLICATION SECRET HERE>
+TOKEN_KEY=<YOUR TOKEN KEY HERE>
+TOKEN_SECRET=<YOUR TOKEN SECRET HERE>
+```
+In your get_twitter_auth.py, enter the following:
+```python
+import dotenv
+import tweepy
+
+def load_dot():
+  dotenv.load()
+
+def handleAuth():
+  consumer_key = dotenv.get('ENV_KEY')
+  consumer_secret = dotenv.get('ENV_SECRET')
+  access_key = dotenv.get('TOKEN_KEY')
+  access_secret = dotenv.get('TOKEN_SECRET')
+  auth = tweepy.OAuthHandler(consumer_key, consumer_secret)
+  auth.set_access_token(access_key, access_secret)
+  return tweepy.API(auth)
+
+def authorizeApp():
+  load_dot()
+  return handleAuth()
+```
+
+To summarize, this file loads the .env files into memory, does the twitter authentication dance, and returns a tweepy API object that is used to interact with Twitter.
+
+#### Step Five: Creating  a Tweet with Markovify and Tweepy
+
+Open your create_tweet file and enter the following. Make sure to not skip the top part that looks commented out, as it will allow the file to become an executable file! It is also what allows us to get away without adding the .py extension. Omitting the .py extension is not mandatory, but it signifies the intention of running this program as an executable in the shell!
+
+```python
+#!/usr/bin/env python3
+# encoding: utf-8
+import sys
+import markovify
+import tweepy
+from get_twitter_auth import authorizeApp
+
+def open_file(filename):
+  with open(filename) as f:
+    text = f.read()
+    return text
+
+def create_chain(text):
+  return markovify.Text(text)
+
+def post_to_twitter(message, api):
+  api.update_status(message)
+
+def write_message(text_model, api):
+  message = (text_model.make_short_sentence(140))
+  print(message)
+  post_to_twitter(message, api)
+
+
+if __name__ == '__main__':
+  if len(sys.argv) != 2:
+    print('Incorrect number of arguments')
+    exit(1)
+  file = open_file(sys.argv[1])
+  model = create_chain(file)
+  api = authorizeApp()
+  write_message(model, api)
+```
+Lets break this code down: We are creating a markov chain based on a text file that is provided via a command line argument. We then post a message to twitter based off the text generated by the markov chain via the Tweepy API. The bottom ```if __name__ == '__main__'``` condition is a python convention that allows the execution of the specified code block if the program has been ran from the command line. If you want to play around with the message generation, feel free to play around with the settings. Comment out line 22 and run `./create_tweet tiny-shakespeare.txt` to check out the messages you can generate without posting anything to Twitter. Don't forget to uncomment out the line when you are done.
+
+#### Step Six: Scheduling your tweets
+
+In scheduler, enter:
+
+```python
+#!/usr/bin/env python3
+# encoding: utf-8
+import os
+import time
+import schedule
+import datetime
+import random
+
+COMMAND = r'./create_tweet 'tiny-shakespeare.txt''
+
+def get_timestamp():
+  current_dt = datetime.datetime.now()
+  return current_dt.strftime('[%Y-%m-%d %H:%M:%S]: ')
+
+def do_math():
+  die = random.randint(1,10)
+  return die % 3 == 0
+
+def run_command():
+  if do_math():
+    status = os.system(COMMAND)
+  else:
+    status = 'Math failed..'
+  return status
+
+def job():
+  with open('status_log.txt', 'a+') as log:
+    log.write(get_timestamp() + 'Initiating command\n')
+    status = run_command()
+    log.write('-'*100)
+    log.write('\n')
+    log.write('Command status = %s.\n' % status)
+
+if __name__=='__main__':
+  schedule.every(3).hours.do(job)
+  with open('status_log.txt', 'a+') as log:
+    log.write(get_timestamp() + 'Tweet scheduler started\n')
+  while True:
+      schedule.run_pending()
+      time.sleep(1)
+```
+This file will schedule a task to run a shell command that will call your create_tweet program with the tiny-shakespeare.txt corpus. Feel free to substitute in any corpus your heart desires! It will also generate a log file with a nicely formatted time stamp whenever the scheduler is started, or it runs the job. The do_math function ensures that your twitter bot posts semi-unpredictably - It seems a little more exciting than posting every day at 2 PM. Feel free to mess around with the scheduling, but keep in mind you don't want to spam twitter, otherwise you will get your bot banned!
+
+Finally, to properly use your twitter bot you will want to run the following command in your shell in the root directory of your project.
+```
+nohup ./scheduler &
+```
+The nohup command will tell whatever program was just executed to ignore the terminal shell closing, and keep on trucking! Please keep in mind, you will need to run this command every time your computer reboots. Push your project up to github, and rejoice!
+
+The source code for my MarkovaleRadio bot is available on [GitHub](https://github.com/f3mshep/machine-tweeting)
+#### Bonus Points
+___
+
+If you have access to a Virtual Private Server, or don't mind setting up a DigitalOcean account ($5 a month!) you can deploy your twitter bot to a server so that it is always running, even when your computer isn't on! Having access to a VPS allows you to do many awesome things such as host cool blog sites *cough*, run applications, do machine learning, host twitterbots... The possibilities are limited to whatever you can think up! If you are interested in DigitalOcean, stay tuned for my next post which will wax poetic about DO.
+
+We will be using systemd to create a service that runs if you computer is on. Systemd is installed on all versions of ubuntu 15.04 and beyond. You should be able to install it on other versions of ubuntu, or use Upstart instead.
+
+ SSH into your VPS, and clone the twitter bot project into your home directory.  Enter the following
+`sudo nano /lib/systemd/system/twitterbot.service`
+which will create a new systemd service and open it in nano. Enter the following:
+
+```
+[Unit]
+Description=Python script to generate tweets
+After=multi-user.target
+
+[Service]
+Type=idle
+User=<YOUR USERNAME HERE>
+Group=<YOUR USERNAME HERE>
+WorkingDirectory=/home/<YOUR USERNAME>/<YOUR PROJECT FOLDER>
+ExecStart=/home/<YOUR USERNAME>/<YOUR PROJECT FOLDER>/scheduler
+
+[Install]
+WantedBy=multi-user.target
+
+```
+Hit ctrl-x to exit the file, and then hit 'y' to save the file. Now, lets enable the service:
+```
+sudo systemctl enable twitterbot.service
+sudo systemctl start twitterbot.service
+sudo systemctl status twitterbot.service
+```
+Make sure the status checks out. If it doesn't, make sure all your path settings are correct, and that your user has root privileges. Also make sure to check the contents of your logfile in the project directory to verify the scheduler was properly started.
+
+Congrats! You have an autonomous twitter bot up and running!
+
+")

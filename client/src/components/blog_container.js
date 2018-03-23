@@ -2,6 +2,8 @@ import React from 'react';
 import NavBar from "../containers/blog_nav_bar";
 import BlogCard from "../containers/blog_card";
 import Footer from "../containers/footer";
+import ReactMarkdown from "react-markdown";
+import CodeBlock from "./codeblock";
 
 class BlogComponent extends React.Component{
 
@@ -22,7 +24,7 @@ class BlogComponent extends React.Component{
   }
 
   formatPreview(post){
-    return post.split("\n")[0]
+    return <ReactMarkdown skipHtml={false} escapeHtml={false} renderers={{ code: CodeBlock }} source={post.split("\n")[0]} />;
   }
 
   addPosts(){
